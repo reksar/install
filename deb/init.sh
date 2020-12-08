@@ -1,14 +1,12 @@
 #!/bin/bash
-# Runs from here.
-# Makes current dir the apt local repo.
-#TODO: use sources list dir
+#
+# Runs from here. Makes current dir the apt local repo.
 
-REPOS=/etc/apt/sources.list
-CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-CURR_REPO="deb [trusted=yes] file:${CURR_DIR} ./"
-CURR_REPO_PATTERN=" file:${CURR_DIR}\s"
-if grep -q "${CURR_REPO_PATTERN}" ${REPOS}; then
-	echo "Repository already added."
-else
-	echo ${CURR_REPO} | sudo tee -a ${REPOS}
+CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+RECORD="deb [trusted=yes] file:${CURRENT_DIR} ./"
+RECORDS_DIR=/etc/apt/sources.list.d
+RECORD_NAME=my
+RECORD_LIST=${RECORDS_DIR}/${RECORD_NAME}.list
+if [ ! -f ${RECORD_LIST} ]; then
+	echo ${RECORD} | sudo tee ${RECORD_LIST}
 fi

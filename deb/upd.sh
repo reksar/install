@@ -1,9 +1,9 @@
 #!/bin/bash
-# Runs from here.
-# Scans this local repo for new *.deb, then updates Packages.gz and aptitude
+# Runs from here. Scans this local repo for new *.deb, then updates Packages.gz
+# and aptitude.
 
 
-# Make sure that this is the local apt repo.
+# Make sure that this is the apt repo.
 ./init.sh
 
 
