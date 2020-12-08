@@ -59,5 +59,5 @@ if [ $? -eq 0 ]; then
 	./upd.sh
 
 
-	sudo aptitude install 
+	sudo aptitude install ${NAME}=${VERSION}-${RELEASE}
 fi
