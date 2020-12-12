@@ -2,13 +2,26 @@
 
 NAME=openssl
 VERSION=1.1.1h
-RELEASE=1
+RELEASE=my
+
 URL_BASE="https://www.openssl.org/source/"
 SRC_ZIP="openssl-${VERSION}.tar.gz"
 SHA_FILE="${SRC_ZIP}.sha256"
 SHA_URL=${URL_BASE}${SHA_FILE}
 SRC_URL=${URL_BASE}${SRC_ZIP}
-DEB_DIR=../../deb
+DEB_DIR=../deb
+
+
+# Try to find and install this package if it already in apt database.
+${DEB_DIR}/try.sh --name ${NAME} --version ${VERSION} --release ${RELEASE}
+if [ $? -eq 0 ]; then
+  # The package is already installed.
+  exit 0
+fi
+
+
+# apt package is not found.
+echo Buildind from sources ...
 
 
 #--- CLEAR ---
@@ -59,5 +72,5 @@ if [ $? -eq 0 ]; then
 	./upd.sh
 
 
-	sudo aptitude install ${NAME}=${VERSION}-${RELEASE}
+	sudo aptitude -y install ${NAME}=${VERSION}-${RELEASE}
 fi
