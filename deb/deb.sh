@@ -4,6 +4,7 @@
 # Uses checkinstall to build deb package from given sources.
 # Uses doc-pak/ or doc/ dir, or --nodoc arg (see checkinstall docs).
 # Uses description-pak file or trying to create it based on README.
+#
 # All args are optional.
 POSITIONAL=()
 while [[ $# -gt 0 ]]; do
@@ -59,7 +60,7 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 # restore positional parameters
-set -- "${POSITIONAL[@]}" 
+set -- "${POSITIONAL[@]}"
 
 
 #--- SET CHECKINSTALL ARGS ---
