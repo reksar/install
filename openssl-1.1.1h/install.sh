@@ -15,8 +15,8 @@ DEB_DIR=../deb
 # Try to find and install this package if it already in apt database.
 ${DEB_DIR}/try.sh --name ${NAME} --version ${VERSION} --release ${RELEASE}
 if [ $? -eq 0 ]; then
-  # The package is already installed.
-  exit 0
+    # The package is already installed.
+    exit 0
 fi
 
 
@@ -25,12 +25,13 @@ echo Buildind from sources ...
 
 
 #--- CLEAR ---
+# TODO: make it a function
 if [ -f "${SRC_ZIP}" ]; then
-	rm ${SRC_ZIP}
+    rm ${SRC_ZIP}
 fi
 
 if [ -f "${SHA_FILE}" ]; then
-	rm ${SHA_FILE}
+    rm ${SHA_FILE}
 fi
 
 rm -rf $(ls -d */)
@@ -46,34 +47,38 @@ echo "${SHA_KEY} ${SRC_ZIP}" | sha256sum --check --strict
 if [ $? -eq 0 ]; then
 
 
-	#--- UNZIP ---
-	tar zxvf ${SRC_ZIP}
-	SRC_DIR=$(ls -d */)
-	cd ${SRC_DIR}
+    #--- UNZIP ---
+    tar zxvf ${SRC_ZIP}
+    SRC_DIR=$(ls -d */)
+    cd ${SRC_DIR}
 
 
-	#--- BUILD BIN ---
-	./config \
-	  --prefix=/usr/local/ssl \
-	  --openssldir=/usr/local/ssl \
-	  no-ssl2
-	  
-	make
+    #--- BUILD BIN ---
+    ./config \
+    --prefix=/usr/local/ssl \
+    --openssldir=/usr/local/ssl \
+    no-ssl2
+    
+    make
 
 
-	#--- BUILD DEB ---
-	${DEB_DIR}/deb.sh \
-		--name ${NAME} \
-		--version ${VERSION} \
-		--release ${RELEASE} \
-		--provides "openssl-1.1.1 libssl-1.1"
+    #--- BUILD DEB ---
+    ${DEB_DIR}/deb.sh \
+        --name ${NAME} \
+        --version ${VERSION} \
+        --release ${RELEASE} \
+        --provides "openssl-1.1.1 libssl-1.1"
 
 
-	#--- UPDATE REPO ---
-	mv *.deb ${DEB_DIR}
-	cd ${DEB_DIR}
-	./upd.sh
+    #--- UPDATE REPO ---
+    mv *.deb ${DEB_DIR}
+    cd ${DEB_DIR}
+    ./upd.sh
 
 
-	sudo aptitude -y install ${NAME}=${VERSION}-${RELEASE}
+    sudo aptitude -y install ${NAME}=${VERSION}-${RELEASE}
+    # TODO: clear dir
+    
+    
+    echo "/usr/local/ssl/lib" | sudo tee /etc/ld.so.conf.d/openssl.conf
 fi
