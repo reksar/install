@@ -63,16 +63,15 @@ if [ $? -eq 0 ]; then
 
 
     #--- BUILD DEB ---
-    ${DEB_DIR}/deb.sh \
+    ../${DEB_DIR}/deb.sh \
         --name ${NAME} \
         --version ${VERSION} \
-        --release ${RELEASE} \
-        --provides "openssl-1.1.1 libssl-1.1"
+        --release ${RELEASE}
 
 
     #--- UPDATE REPO ---
-    mv *.deb ${DEB_DIR}
-    cd ${DEB_DIR}
+    mv *.deb ../${DEB_DIR}
+    cd ../${DEB_DIR}
     ./upd.sh
 
 

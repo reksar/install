@@ -40,13 +40,6 @@ while [[ $# -gt 0 ]]; do
     shift  # past value
     ;;
 
-    # Features, provided by this package.
-    --provides)
-    PROVIDES="$2"
-    shift  # past argument
-    shift  # past value
-    ;;
-
     # Do not include docs.
     --nodoc)
     NODOC="$key"
@@ -76,10 +69,6 @@ fi
 
 if [ ! -z ${DEPS} ]; then
     SET_DEPS="--requires=\"${DEPS}\""
-fi
-
-if [ ! -z ${PROVIDES} ]; then
-    SET_PROVIDES="--provides=${PROVIDES}"
 fi
 
 
@@ -125,5 +114,5 @@ fi
 sudo checkinstall \
   -Dy \
   --install=no \
-  ${SET_VER} ${SET_NAME} ${SET_DEPS} ${SET_PROVIDES} ${NODOC} \
+  ${SET_VER} ${SET_NAME} ${SET_DEPS} ${NODOC} \
   sudo make install
