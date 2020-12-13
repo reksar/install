@@ -20,15 +20,23 @@ while [[ $# -gt 0 ]]; do
     ;;
     
     # When there are several packages with the same name in apt database, the 
-    # package version helps to specify concrete package.
+    # package version and release helps to identify concrete package.
     #
-    # List versions and distributions of a package:
+    # List version-release and distributions of a package:
     #	aptitude versions <package>
     #
-    # Specify package by version:
-    #	aptitude show <package>=<version>
+    # Specify package:
+    #	aptitude show <package>=<version>-<release>
     --version)
     VER="$2"
+    shift  # past argument
+    shift  # past value
+    ;;
+    
+    # We need to cpecify release as a part of package identity (see above).
+    # By default, checkinstall sets release to 1 during building deb package.
+    --release)
+    RELEASE="$2"
     shift  # past argument
     shift  # past value
     ;;
@@ -59,12 +67,16 @@ set -- "${POSITIONAL[@]}"
 
 
 #--- SET CHECKINSTALL ARGS ---
+if [ ! -z ${NAME} ]; then
+    SET_NAME="--pkgname=${NAME}"
+fi
+
 if [ ! -z ${VER} ]; then
     SET_VER="--pkgversion=${VER}"
 fi
 
-if [ ! -z ${NAME} ]; then
-    SET_NAME="--pkgname=${NAME}"
+if [ ! -z ${RELEASE} ]; then
+    SET_RELEASE="--pkgrelease=${RELEASE}"
 fi
 
 if [ ! -z ${DEPS} ]; then
@@ -114,5 +126,5 @@ fi
 sudo checkinstall \
   -Dy \
   --install=no \
-  ${SET_VER} ${SET_NAME} ${SET_DEPS} ${NODOC} \
+  ${SET_NAME} ${SET_VER} ${SET_RELEASE} ${SET_DEPS} ${NODOC} \
   sudo make install

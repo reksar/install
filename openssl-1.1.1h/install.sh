@@ -75,6 +75,7 @@ if [ $? -eq 0 ]; then
     ./upd.sh
 
 
+    # TODO: Check that we have strictly this version of a package in apt DB.
     sudo aptitude -y install ${NAME}=${VERSION}-${RELEASE}
     # TODO: clear dir
     
