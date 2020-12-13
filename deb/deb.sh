@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Runs from sources root dir.
+# Runs from a root (where Makefile is) of the sources, that will be packed into 
+# deb.
 # Uses checkinstall to build deb package from given sources.
 # Uses doc-pak/ or doc/ dir, or --nodoc arg (see checkinstall docs).
 # Uses description-pak file or trying to create it based on README.
@@ -12,7 +13,7 @@ while [[ $# -gt 0 ]]; do
     case $key in
     
     # apt package name.
-    -n|--name)
+    --name)
     NAME="$2"
     shift  # past argument
     shift  # past value
@@ -26,21 +27,21 @@ while [[ $# -gt 0 ]]; do
     #
     # Specify package by version:
     #	aptitude show <package>=<version>
-    -v|--version)
+    --version)
     VER="$2"
     shift  # past argument
     shift  # past value
     ;;
 
     # Other required packages.
-    -d|--deps)
+    --deps)
     DEPS="$2"
     shift  # past argument
     shift  # past value
     ;;
 
     # Features, provided by this package.
-    -p|--provides)
+    --provides)
     PROVIDES="$2"
     shift  # past argument
     shift  # past value
