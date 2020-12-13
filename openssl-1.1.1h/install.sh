@@ -53,7 +53,11 @@ if [ $? -eq 0 ]; then
 
 
 	#--- BUILD BIN ---
-	./config --prefix=/usr/local/ssl --openssldir=/usr/local/ssl no-ssl2
+	./config \
+	  --prefix=/usr/local/ssl \
+	  --openssldir=/usr/local/ssl \
+	  no-ssl2
+	  
 	make
 
 
