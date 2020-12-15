@@ -1,4 +1,5 @@
 #!/bin/bash
+# TODO: make release as a prart of a name to prevent name conflicts.
 
 NAME=openssl
 VERSION=1.1.1h
@@ -13,7 +14,7 @@ DEB_DIR=../deb
 
 
 # Try to find and install this package if it already in apt database.
-${DEB_DIR}/try.sh --name ${NAME} --version ${VERSION} --release ${RELEASE}
+${DEB_DIR}/try.sh --name ${NAME}-${RELEASE} --version ${VERSION} --release ${RELEASE}
 if [ $? -eq 0 ]; then
     # The package is already installed.
     exit 0
@@ -64,7 +65,7 @@ if [ $? -eq 0 ]; then
 
     #--- BUILD DEB ---
     ../${DEB_DIR}/deb.sh \
-        --name ${NAME} \
+        --name ${NAME}-${RELEASE} \
         --version ${VERSION} \
         --release ${RELEASE}
 
@@ -76,7 +77,7 @@ if [ $? -eq 0 ]; then
 
 
     # TODO: Check that we have strictly this version of a package in apt DB.
-    sudo aptitude -y install ${NAME}=${VERSION}-${RELEASE}
+    sudo aptitude -y install ${NAME}-${RELEASE}=${VERSION}-${RELEASE}
     # TODO: clear dir
     
     
