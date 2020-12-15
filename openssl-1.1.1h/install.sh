@@ -81,4 +81,5 @@ if [ $? -eq 0 ]; then
     
     
     echo "/usr/local/ssl/lib" | sudo tee /etc/ld.so.conf.d/openssl.conf
+    sudo ldconfig
 fi
