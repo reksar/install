@@ -1,5 +1,4 @@
 #!/bin/bash
-# TODO: make release as a prart of a name to prevent name conflicts.
 
 NAME=openssl
 VERSION=1.1.1h
