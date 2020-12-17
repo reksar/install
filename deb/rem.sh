@@ -5,7 +5,7 @@
 FILENAME=$1
 
 if [[ ${FILENAME} == *.deb ]]; then
-  rm ${FILENAME}
+  rm --force ${FILENAME}
   if [ $? -eq 0 ]; then
     ./upd.sh
   fi

@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# Runs from here.
 
 NAME=openssl
 VERSION=1.1.1h
@@ -54,11 +56,7 @@ if [ $? -eq 0 ]; then
 
 
     #--- BUILD BIN ---
-    ./config \
-    --prefix=/usr/local/ssl \
-    --openssldir=/usr/local/ssl \
-    no-ssl2
-    
+    ./config no-ssl2
     make
 
 
