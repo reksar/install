@@ -1,12 +1,14 @@
 # Install scripts for Debian / Ubuntu  
 
-## `deb` dir as local apt repo  
+## The `deb` dir as local apt repo  
 
-The main dir is `deb`, that is the `apt` local repo. It contains a `*.deb` files that are awailable in the `apt` database, so it is possible to manage local third-party packages with `apt` or `aptitude`.  
+This is the local **apt** repo, that makes it possible to manage local packages with **apt** or **aptitude**. It contains a `*.deb` packages and management shell scripts. Also `Packages.gz` may be automatically created.  
 
-### Adding local package  
+### Adding local packages  
 
-Put a `*.deb` files into `deb` dir, then run `./upd.sh`. The `Packages.gz` and aptitude will be updated. Also, this will automatically inits the local repo with `./init.sh`.  
+Put a `*.deb` files into the `deb` dir, then run `./upd.sh`.
+
+The `./Packages.gz` and **apt** database will be updated. Also, this will automatically inits the local repo by `./init.sh`.  
 
 ### Removing local package  
 
@@ -14,15 +16,14 @@ Put a `*.deb` files into `deb` dir, then run `./upd.sh`. The `Packages.gz` and a
 
 ## Other dirs  
 
-Other dirs contains simple shell scripts for getting the `*.deb` package, putting it into the local repo and installing then. They builds `*.deb` package from sources, using `checkinstall`.  
+Other dirs contains a simple shell scripts for building `*.deb` package and then installing it with **aptitude**.  
 
 ### OpenSSL  
 
 `cd install/openssl-1.1.1h && ./install.sh`  
 
-## Requirements
+## Requirements  
 
-- aptitude
-- checkinstall
-- sudo
-
+- checkinstall  
+- aptitude  
+- sudo  

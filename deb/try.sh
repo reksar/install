@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Runs from anywhere. Tries to install the specified apt package if it found.
+# Runs from anywhere.
+# Tries to install the specified apt package if it found.
 #
 # Return status:
 #   0 if package has been installed

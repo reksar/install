@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Runs from here. Deletes deb file and updates apt sources.
+# Runs from here.
+# Deletes deb file and updates apt sources.
 
 FILENAME=$1
 

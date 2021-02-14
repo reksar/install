@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Runs from here.
+# Runs from here. Automatically runs from `upd.sh`.
 # Makes current dir the apt local repo.
 
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
