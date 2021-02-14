@@ -6,7 +6,7 @@ This is the local **apt** repo, that makes it possible to manage local packages 
 
 ### Adding local packages  
 
-Put a `*.deb` files into the `deb` dir, then run `./upd.sh`.
+Put a `*.deb` files into the `deb` dir, then run `./upd.sh`.  
 
 The `./Packages.gz` and **apt** database will be updated. Also, this will automatically inits the local repo by `./init.sh`.  
 
