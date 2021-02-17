@@ -10,7 +10,7 @@ repo: $(DEB_REPO)
 	sudo aptitude update
 
 
-.PHONY: unrepo
+.PHONY: norepo
 unrepo:
 	sudo rm $(DEB_REPO)
 	sudo aptitude update
